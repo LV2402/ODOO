@@ -24,16 +24,22 @@ const QuestionList = () => {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center px-4 text-center">
-        <h1 className="text-4xl font-bold text-blue-700 mb-4">Welcome to StackIt!</h1>
-        <p className="text-lg text-gray-700 mb-6">
-          Please log in to explore and answer questions from the community.
+      <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-purple-800 to-indigo-900 px-4 text-center">
+        <h1 className="text-4xl font-bold text-white mb-4">Welcome to StackIt! 👋</h1>
+        <p className="text-lg text-gray-200 mb-6 max-w-xl">
+          Please log in or register to explore questions, help others, and be a part of our tech community.
         </p>
-        <div className="space-x-4">
-          <Link to="/register" className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <div className="flex gap-4">
+          <Link
+            to="/register"
+            className="px-6 py-2 bg-white text-purple-700 font-semibold rounded shadow hover:bg-purple-100 transition"
+          >
             Register
           </Link>
-          <Link to="/login" className="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">
+          <Link
+            to="/login"
+            className="px-6 py-2 border border-white text-white rounded hover:bg-white hover:text-purple-800 transition"
+          >
             Login
           </Link>
         </div>
@@ -42,12 +48,13 @@ const QuestionList = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">All Questions</h1>
+    <div className="max-w-5xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-bold text-purple-800 mb-6">All Questions</h1>
+
       {questions.length === 0 ? (
-        <p>No questions posted yet.</p>
+        <p className="text-gray-600 text-center">No questions posted yet. Be the first to ask!</p>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-6">
           {questions.map((q) => (
             <QuestionCard key={q._id} question={q} />
           ))}
