@@ -6,6 +6,7 @@ import Header from './components/Header';
 import QuestionList from './pages/QuestionList';
 import QuestionDetail from './pages/QuestionDetail';
 import AskQuestion from './pages/AskQuestion';
+import Home from './pages/Home';
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -14,7 +15,7 @@ function App() {
     <div className="min-h-screen bg-gray-100">
       <Header />
       <Routes>
-        <Route path="/" element={<QuestionList />} />
+        <Route path="/" element={isLoggedIn ? <QuestionList /> : <Home/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/questions/:id" element={<QuestionDetail />} />

@@ -32,15 +32,66 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">Register</h2>
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <input name="username" placeholder="Username" onChange={handleChange} className="input" required />
-        <input name="email" type="email" placeholder="Email" onChange={handleChange} className="input" required />
-        <input name="password" type="password" placeholder="Password" onChange={handleChange} className="input" required />
-        <button type="submit" className="btn">Register</button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-800 to-indigo-900 px-4">
+      <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-2xl">
+        <h2 className="text-3xl font-bold text-center mb-6 text-purple-700">Register for StackIt</h2>
+        {error && <p className="text-red-500 mb-4 text-sm text-center">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-gray-700 mb-1" htmlFor="username">Username</label>
+            <input
+              name="username"
+              type="text"
+              placeholder="Enter your username"
+              onChange={handleChange}
+              value={form.username}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1" htmlFor="email">Email</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              onChange={handleChange}
+              value={form.email}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1" htmlFor="password">Password</label>
+            <input
+              name="password"
+              type="password"
+              placeholder="Create a password"
+              onChange={handleChange}
+              value={form.password}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-purple-700 hover:bg-purple-800 text-white font-semibold py-2 rounded transition duration-200"
+          >
+            Register
+          </button>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-gray-500">
+          Already have an account?{' '}
+          <a href="/login" className="text-purple-600 hover:underline font-medium">
+            Login here
+          </a>
+        </p>
+      </div>
     </div>
   );
 };
