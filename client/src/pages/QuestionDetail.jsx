@@ -99,6 +99,9 @@ const QuestionDetail = () => {
 
   if (!question) return <div className="p-6">Loading...</div>;
 
+  const userId = user?.id || user?._id;
+  const authorId = question.author?._id;
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-2">{question.title}</h2>
@@ -116,7 +119,7 @@ const QuestionDetail = () => {
         <p className="mb-4">No answers yet.</p>
       ) : (
         question.answers.map((a, i) => (
-          <div id={`answer-${a._id}`} key={i} className={`mb-4 p-3 rounded border ${a.isAccepted ? 'border-green-600 bg-green-50' : 'bg-gray-50'}`}>
+          <div key={i} className={`mb-4 p-3 rounded border ${a.isAccepted ? 'border-green-600 bg-green-50' : 'bg-gray-50'}`}>
             <div dangerouslySetInnerHTML={{ __html: a.content }} className="text-gray-800 mb-2" />
 
             <div className="flex items-center gap-4 text-sm mt-2">
@@ -138,7 +141,7 @@ const QuestionDetail = () => {
                 <span className="text-green-700 font-bold ml-2">✔ Accepted Answer</span>
               )}
 
-              {user?.id === question.user && !a.isAccepted && (
+              {userId === authorId && !a.isAccepted && (
                 <button
                   className="ml-auto text-blue-600 hover:underline"
                   onClick={() => handleAccept(a._id)}
@@ -152,17 +155,21 @@ const QuestionDetail = () => {
       )}
 
       {user ? (
-        <form onSubmit={handleSubmit}>
-          <textarea
-            rows="4"
-            value={answer}
-            onChange={(e) => setAnswer(e.target.value)}
-            className="w-full border rounded p-2 mb-2"
-            placeholder="Write your answer in HTML or plain text..."
-          />
-          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
-          <button type="submit" className="btn">Post Answer</button>
-        </form>
+        userId === authorId ? (
+          <p className="mt-4 text-gray-600 italic">You cannot answer your own question.</p>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <textarea
+              rows="4"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              className="w-full border rounded p-2 mb-2"
+              placeholder="Write your answer in HTML or plain text..."
+            />
+            {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+            <button type="submit" className="btn">Post Answer</button>
+          </form>
+        )
       ) : (
         <p className="mt-4 text-gray-600">Login to post an answer.</p>
       )}
