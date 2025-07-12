@@ -1,0 +1,86 @@
+### ✅ Register User
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "sahithi",
+  "email": "sahithi@example.com",
+  "password": "password123"
+}
+
+### ✅ Login User
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "sahithi@example.com",
+  "password": "password123"
+}
+
+###
+
+### ✅ Create Question (Auth Required)
+# ⚠️ Replace {{TOKEN}} with JWT token from login response
+POST http://localhost:3000/api/questions
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFkYzViOTNhNDQ0MjVjMmI4MTg1MiIsImlhdCI6MTc1MjI5MjU4NX0.KGnaroV8EuGYi4uv4owcwrqZumx93ldJtMuucRgi_FA
+
+{
+  "title": "What is JWT and how does it work?",
+  "description": "<p>This is a <strong>rich text</strong> description using HTML</p>",
+  "tags": ["jwt", "authentication"]
+}
+
+###
+
+### ✅ Get All Questions
+GET http://localhost:3000/api/questions
+
+###
+
+### ✅ Get Question by ID
+# ⚠️ Replace {{QUESTION_ID}} with actual Question ID
+GET http://localhost:3000/api/questions/6871dd6a93a44425c2b81859
+
+###
+
+### ✅ Post Answer to Question
+# ⚠️ Replace {{QUESTION_ID}} and {{TOKEN}}
+POST http://localhost:3000/api/answers/6871dd6a93a44425c2b81859
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFkYzViOTNhNDQ0MjVjMmI4MTg1MiIsImlhdCI6MTc1MjI5MjgxOX0.L-CiWOGhVuT8awh-c3vFVSr8SBvPmz8_7n3tmixprHw
+
+{
+  "content": "<p>This is an answer using <strong>rich text</strong>.</p>"
+}
+
+###
+
+### ✅ Upvote Answer
+# ⚠️ Replace {{ANSWER_ID}} and {{TOKEN}}
+PATCH http://localhost:3000/api/answers/6871de2e93a44425c2b81864/vote
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFkYzViOTNhNDQ0MjVjMmI4MTg1MiIsImlhdCI6MTc1MjI5MjgxOX0.L-CiWOGhVuT8awh-c3vFVSr8SBvPmz8_7n3tmixprHw
+
+{
+  "action": "up"
+}
+
+###
+
+### ✅ Downvote Answer
+# ⚠️ Replace {{ANSWER_ID}} and {{TOKEN}}
+PATCH http://localhost:3000/api/answers/6871de2e93a44425c2b81864/vote
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFkYzViOTNhNDQ0MjVjMmI4MTg1MiIsImlhdCI6MTc1MjI5MjgxOX0.L-CiWOGhVuT8awh-c3vFVSr8SBvPmz8_7n3tmixprHw
+
+{
+  "action": "down"
+}
+
+###
+
+### ✅ Accept Answer
+# ⚠️ Replace {{ANSWER_ID}} and {{TOKEN}} (must be the question's author)
+PATCH http://localhost:3000/api/answers/6871de2e93a44425c2b81864/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NzFkYzViOTNhNDQ0MjVjMmI4MTg1MiIsImlhdCI6MTc1MjI5MjgxOX0.L-CiWOGhVuT8awh-c3vFVSr8SBvPmz8_7n3tmixprHw
