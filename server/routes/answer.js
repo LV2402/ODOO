@@ -86,23 +86,29 @@ router.patch('/:id/vote', protect, async (req, res) => {
 // @route   PATCH /api/answers/:id/accept
 // @desc    Accept an answer for a question (by question owner)
 // @access  Private
-router.patch('/:id/accept', protect, async (req, res) => {
+router.patch('/:answerId/accept', protect, async (req, res) => {
+  const { answerId } = req.params;
+
   try {
-    const answer = await Answer.findById(req.params.id).populate('question');
+    const answer = await Answer.findById(answerId).populate('question');
     if (!answer) return res.status(404).json({ message: 'Answer not found' });
 
     const question = await Question.findById(answer.question._id);
+    if (!question) return res.status(404).json({ message: 'Question not found' });
 
-    if (!question.author.equals(req.user._id)) {
-      return res.status(403).json({ message: 'Only question author can accept an answer' });
+    // ✅ Optional: Only allow question author to accept
+    if (req.user.id !== question.author.toString()) {
+      return res.status(403).json({ message: 'Only the question author can accept an answer' });
     }
 
-    question.acceptedAnswer = answer._id;
-    await question.save();
+    // Set current answer as accepted
+    answer.isAccepted = true;
+    await answer.save();
 
-    res.json({ message: 'Answer accepted', acceptedAnswer: answer._id });
+    return res.status(200).json({ message: 'Answer accepted successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

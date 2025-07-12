@@ -29,6 +29,7 @@ const Login = () => {
 
       const data = await res.json();
       login(data);
+      console.log('Login successful:', data);
       navigate('/');
     } catch (err) {
       setError(err.message);

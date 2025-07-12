@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Editor } from '@tinymce/tinymce-react';
 import { useAuth } from '../context/AuthContext';
+import QuestionDetail from './QuestionDetail';
 
 const AskQuestion = () => {
   const [title, setTitle] = useState('');
