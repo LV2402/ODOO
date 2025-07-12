@@ -11,6 +11,8 @@ StackIt streamlines the Q&A experience, similar to platforms like Stack Overflow
 > 🛠 Built by *Team HAcKV* for the *Odoo Hackathon 2025*  
 > 👥 *Team Number:* 0853
 
+Video Link : https://drive.google.com/file/d/1RLs21Wo0axxiwov2Yg84c4U2IPPFqr9z/view?usp=drive_link 
+
 *Team Members:*
 - Vamshi Lagishetty  
 - Kavya Sahithi  
